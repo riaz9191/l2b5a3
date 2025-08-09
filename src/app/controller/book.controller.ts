@@ -43,3 +43,13 @@ bookRoutes.patch("/:id", async (req: Request, res: Response) => {
        data: book,
    });
 });
+
+bookRoutes.delete("/:id", async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const book = await Book.findByIdAndDelete(id);
+    res.status(200).json({
+        success: true,
+        message: "Book deleted successfully",
+        data: book,
+    });
+});

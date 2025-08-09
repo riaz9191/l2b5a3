@@ -32,3 +32,14 @@ bookRoutes.get("/:id", async (req: Request, res: Response) => {
         data: book,
     });
 });
+
+bookRoutes.patch("/:id", async (req: Request, res: Response) => {
+   const id = req.params.id;
+   const body = req.body;
+   const book = await Book.findByIdAndUpdate(id, body, { new: true });
+   res.status(200).json({
+       success: true,
+       message: "Book updated successfully",
+       data: book,
+   });
+});

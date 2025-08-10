@@ -1,3 +1,4 @@
+import { Document, Model } from "mongoose";
 
 export interface IBooks {
   title: string;
@@ -7,4 +8,9 @@ export interface IBooks {
   description?: string;
   copies: number;
   available?: boolean;
+}
+
+
+export interface BookCheckStaticMethod extends Model<IBooks> {
+  isBookAvailable(bookId: string): Promise<boolean>;
 }

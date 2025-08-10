@@ -1,8 +1,8 @@
 import { minLength } from "zod";
-import { IBooks } from "../interface/book.interface";
+import { BookCheckStaticMethod, IBooks } from "../interface/book.interface";
 import { model, Schema } from "mongoose";
 
-export const bookSchema = new Schema<IBooks>(
+export const bookSchema = new Schema<IBooks , BookCheckStaticMethod>(
   {
     title: { type: String, required: [true, "Title is required"], trim: true },
     author: {
@@ -43,6 +43,11 @@ export const bookSchema = new Schema<IBooks>(
     versionKey: false,
   }
 );
+
+bookSchema.static("isBookAvailable", async function (bookId: string) {
+  const book = await this.findById(bookId);
+  return book ? true : false;
+});
 
 
 const Book = model<IBooks>("Book", bookSchema);

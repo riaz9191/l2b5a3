@@ -12,5 +12,5 @@ export interface IBooks {
 
 
 export interface BookCheckStaticMethod extends Model<IBooks> {
-  isBookAvailable(bookId: string): Promise<boolean>;
+  isBookExists(bookId: string): Promise<boolean>;
 }

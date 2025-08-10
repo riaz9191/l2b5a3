@@ -44,11 +44,11 @@ export const bookSchema = new Schema<IBooks , BookCheckStaticMethod>(
   }
 );
 
-bookSchema.static("isBookAvailable", async function (bookId: string) {
+bookSchema.static("isBookExists", async function (bookId: string) {
   const book = await this.findById(bookId);
   return book ? true : false;
 });
 
 
-const Book = model<IBooks>("Book", bookSchema);
+const Book = model<IBooks,BookCheckStaticMethod>("Book", bookSchema);
 export default Book;

@@ -13,11 +13,11 @@ export const borrowSchema = new Schema<IBorrow, BorrowLogicStatic>({
 });
 
 borrowSchema.pre("save", async function (next) {
-  const book = await Book.findById(this.book);
-  if (!book) throw new Error("Book not found");
-  if (book.copies < this.quantity)
-    throw new Error("Not enough copies available");
-  next();
+    const book = await Book.findById(this.book);
+    if (!book) throw new Error("Book Do Not Exist!")
+
+    if (book.copies < this.quantity) throw new Error("Not Enough Book Copies Available!")
+    next()
 });
 
 borrowSchema.static(
